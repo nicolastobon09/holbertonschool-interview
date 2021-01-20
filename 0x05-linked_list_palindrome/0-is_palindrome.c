@@ -7,12 +7,11 @@
  */
 int is_palindrome(listint_t **head)
 {
+	listint_t *current = *head;
+	int length;
 
 	if (!head || !*head)
 		return (1);
-
-	listint_t *current = *head;
-	int length;
 
 	for (length = 0; current != NULL; length++)
 		current = current->next;
