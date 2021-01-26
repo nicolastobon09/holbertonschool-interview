@@ -3,7 +3,7 @@ import re
 
 
 class LogParsing:
-    # const
+    # Dictionary of code status
     CODES = {}
 
     # General variables
@@ -11,10 +11,6 @@ class LogParsing:
     total_size = 0
     status = ""
     file_size = ""
-
-    def __init__(self):
-        """" constructor """
-        self.run()
 
     def run(self):
         """"
