@@ -26,9 +26,9 @@ def run():
     step = 1
     size = 0
 
-    try:
-        for line in sys.stdin:
-
+    
+    for line in sys.stdin:
+        try:
             status, file_size = re.search(PATTERN, line).group().split()
 
             try:
@@ -45,9 +45,9 @@ def run():
 
             step += 1
 
-    except (KeyboardInterrupt, EOFError):
-        print_log_parsing(CODES, size)
-        exit()
+        except (KeyboardInterrupt, EOFError):
+            print_log_parsing(CODES, size)
+            exit()
 
 
 if __name__ == '__main__':
