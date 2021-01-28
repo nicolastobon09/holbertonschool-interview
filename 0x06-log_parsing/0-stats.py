@@ -4,62 +4,70 @@
 import re
 
 
-class LogParsing:
-    """ Dictionary of code status """
-    CODES = {}
-
-    """ General variables"""
-    step = 0
-    total_size = 0
+def parser(line):
+    """"
+    parsing lines
+    Args:
+        line: input from stdin
+        return: status code and size
+    """
     status = ""
     file_size = ""
 
-    def run(self):
-        """"
-        function that search the status code and size number
-        """
-        while True:
-            try:
-                line = input()
+    PATTERN = '([\\d]{3})\\s([\\d]{1,4})$'
+    status, file_size = re.search(PATTERN, line).group().split()
 
-                self.parser(line)
-                self.step += 1
-            except (KeyboardInterrupt, EOFError):
-                self.print_log_parsing()
-                exit()
+    print(file_size)
 
-    def parser(self, line):
-        """"
-        parsing lines
-        Args:
-            line: input from stdin
-        """
-        PATTERN = '([\\d]{3})\\s([\\d]{1,4})$'
-        STOP = 9
+    return (status, file_size)
 
-        self.status, self.file_size = re.search(PATTERN, line).group().split()
 
-        self.total_size += int(self.file_size)
+def print_log_parsing(CODES, file_size):
+    """
+    function that print parsing logs
+    args:
+        codes: is a dictionary of status code
+        file_size: is the size of status
+    """
+    print("File size: {}".format(file_size))
+    for key, value in sorted(CODES.items()):
+        print("{}: {}".format(key, value))
 
+
+def run():
+    """"
+    function that search the status code and size number
+    """
+    CODES = {}
+    step = 0
+    size = 0
+    STOP = 9
+
+    while True:
         try:
-            if self.CODES[self.status]:
-                self.CODES[self.status] += 1
-        except KeyError:
-            self.CODES[self.status] = 1
 
-        if self.step == STOP:
-            self.print_log_parsing()
-            self.step = 0
+            line = input()
 
-    def print_log_parsing(self):
-        """
-        function that print parsing logs
-        """
-        print("File size: {}".format(self.total_size - int(self.file_size)))
-        for key, value in sorted(self.CODES.items()):
-            print("{}: {}".format(key, value))
+            status, file_size = parser(line)
+
+            try:
+                if CODES[status]:
+                    CODES[status] += 1
+            except KeyError:
+                CODES[status] = 1
+
+            size += int(file_size)
+
+            if step == STOP:
+                print_log_parsing(CODES, size)
+                step = 0
+
+            step += 1
+
+        except (KeyboardInterrupt, EOFError):
+            print_log_parsing(CODES, size)
+            exit()
 
 
 if __name__ == '__main__':
-    init = LogParsing()
-    init.run()
+    run()
