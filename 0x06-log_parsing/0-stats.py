@@ -1,6 +1,7 @@
 #!/usr/bin/python3
-import re
 """ Class LogParsing """
+
+import re
 
 
 class LogParsing:
