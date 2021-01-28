@@ -1,12 +1,13 @@
 #!/usr/bin/python3
 import re
+""" Class LogParsing """
 
 
 class LogParsing:
-    # Dictionary of code status
+    """ Dictionary of code status """
     CODES = {}
 
-    # General variables
+    """ General variables"""
     step = 0
     total_size = 0
     status = ""
