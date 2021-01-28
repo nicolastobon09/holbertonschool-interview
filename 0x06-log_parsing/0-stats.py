@@ -26,10 +26,14 @@ def run():
     step = 1
     size = 0
 
-    
-    for line in sys.stdin:
+    while True:
+
         try:
+            line = input()
+
             status, file_size = re.search(PATTERN, line).group().split()
+
+            size += int(file_size)
 
             try:
                 if CODES[status]:
@@ -37,14 +41,11 @@ def run():
             except KeyError:
                 CODES[status] = 1
 
-            size += int(file_size)
-
             if step == STOP:
                 print_log_parsing(CODES, size)
                 step = 1
 
             step += 1
-
         except (KeyboardInterrupt, EOFError):
             print_log_parsing(CODES, size)
             exit()
