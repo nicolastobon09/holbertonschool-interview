@@ -48,7 +48,7 @@ def run():
 
     except (KeyboardInterrupt, EOFError):
         print_log_parsing(CODES, size)
-        exit()
+        raise
 
 
 if __name__ == '__main__':
