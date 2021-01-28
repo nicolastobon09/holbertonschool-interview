@@ -17,8 +17,6 @@ def parser(line):
     PATTERN = '([\\d]{3})\\s([\\d]{1,4})$'
     status, file_size = re.search(PATTERN, line).group().split()
 
-    print(file_size)
-
     return (status, file_size)
 
 
@@ -39,9 +37,9 @@ def run():
     function that search the status code and size number
     """
     CODES = {}
+    STOP = 9
     step = 0
     size = 0
-    STOP = 9
 
     while True:
         try:
