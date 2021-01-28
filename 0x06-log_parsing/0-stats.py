@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 """ Class LogParsing """
-
 import re
 
 
