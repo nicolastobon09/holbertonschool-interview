@@ -4,22 +4,6 @@
 import re
 
 
-def parser(line):
-    """"
-    parsing lines
-    Args:
-        line: input from stdin
-        return: status code and size
-    """
-    status = ""
-    file_size = ""
-
-    PATTERN = '([\\d]{3})\\s([\\d]{1,4})$'
-    status, file_size = re.search(PATTERN, line).group().split()
-
-    return (status, file_size)
-
-
 def print_log_parsing(CODES, file_size):
     """
     function that print parsing logs
@@ -36,9 +20,10 @@ def run():
     """"
     function that search the status code and size number
     """
+    PATTERN = '([\\d]{3})\\s([\\d]{1,4})$'
     CODES = {}
-    STOP = 9
-    step = 0
+    STOP = 10
+    step = 1
     size = 0
 
     while True:
@@ -46,7 +31,7 @@ def run():
 
             line = input()
 
-            status, file_size = parser(line)
+            status, file_size = re.search(PATTERN, line).group().split()
 
             try:
                 if CODES[status]:
@@ -58,7 +43,7 @@ def run():
 
             if step == STOP:
                 print_log_parsing(CODES, size)
-                step = 0
+                step = 1
 
             step += 1
 
