@@ -26,8 +26,8 @@ def run():
     step = 1
     size = 0
 
-    while True:
-        try:
+    try:
+        while True:
 
             line = input()
 
@@ -47,9 +47,9 @@ def run():
 
             step += 1
 
-        except (KeyboardInterrupt, EOFError):
-            print_log_parsing(CODES, size)
-            exit()
+    except (KeyboardInterrupt, EOFError):
+        print_log_parsing(CODES, size)
+        exit()
 
 
 if __name__ == '__main__':
