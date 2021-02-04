@@ -9,16 +9,23 @@
 int check_cycle(listint_t *list)
 {
 	listint_t *currrent = list;
+	listint_t *tmp = list;
 
 	if (!list)
 		return (0);
 
-	while (currrent->next != list)
+	while (currrent)
 	{
-		if (!currrent->next)
-			return (0);
-		currrent = currrent->next;
+		if (tmp == currrent->next)
+			return (1);
+
+		if(currrent->next)
+			currrent = currrent->next->next;
+		else
+			currrent = currrent->next;
+
+		tmp = tmp->next;
 	}
 
-	return (1);
+	return (0);
 }
